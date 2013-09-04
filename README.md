@@ -8,8 +8,9 @@ CK Kashyap.
 UrXML is vim-friendly and can be used to pretty-print the XML-fragment of
 non-XML file.
 
-Additionaly, the tool is able to translate the usual XML into Ur/Web dialect of
-XML (uses several hardcoded rules)
+Additionaly, the tool is able to translate the usual XML into
+[Ur/Web](http://www.impredicative.com/ur/) dialect of XML (uses several
+hardcoded rules)
 
 Installation
 ------------

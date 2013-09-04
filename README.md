@@ -65,7 +65,7 @@ Simple pretty-printing:
         </b>
     </xml>
 
-Pretty-print with identation:
+Pretty-print with indentation:
 
     $ urxml -i 5 test.xml 
          <xml>
@@ -81,7 +81,7 @@ Pretty-print with identation:
              </b>
          </xml>
 
-Pretty-print with identation, but don't indent first line:
+Pretty-print with indentation, don't indent first line:
 
     $ urxml -i 5 -1 test.xml 
     <xml>

@@ -2,7 +2,7 @@ UrXML
 =====
 
 UrXML is another XML parser/pretty-printer based on
-(http://hackage.haskell.org/package/really-simple-xml-parser)[RSXP] package by
+[http://hackage.haskell.org/package/really-simple-xml-parser](RSXP) package by
 CK Kashyap.
 
 UrXML is vim-friendly and can be used to pretty-print the XML-fragment of
@@ -10,6 +10,18 @@ non-XML file.
 
 Additionaly, the tool is able to translate the usual XML into Ur/Web dialect of
 XML (uses several hardcoded rules)
+
+Installation
+------------
+
+[http://www.haskell.org/platform/](Haskell platform) is required.
+
+    $ git clone https://github.com/grwlf/urxml
+    $ cd urxml
+    $ cabal configure
+    $ cabal build
+    $ cabal install
+
 
 Usage
 -----

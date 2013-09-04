@@ -58,7 +58,8 @@ ppDoc c b d = execWriter (ppDoc' c b d) where
       i = startIndent cfg
       indent1 = if skip1stLineIndent cfg' then [] else indent
       indent = if expandTab cfg then replicate i ' ' else (replicate (i`div`ts) '\t') ++ (replicate (i`mod`ts) ' ')
-      l1 = if i >= (tw-margin) then tw else tw - i
+      -- l1 = if i >= (tw-margin) then tw else tw - i
+      l1 = tw
       line s = tell (s ++ "\n")
 
 xml2doc :: XMLAST -> Doc
@@ -70,12 +71,18 @@ xml2doc ast =
       close = printf "</%s>" name
       in Doc open (map xml2doc asts) close
     (Body s) -> DocT s
-    (Comment s) -> Doc "<!--" [DocT s] "-->"
+    -- FIXME: Minor bug in the Ur/Web : multiline comments breaks line counter
+    -- We print comments as single lines
+    -- (Comment s) -> Doc "<!--" [DocT s] "-->"
+    (Comment s) -> DocL $ "<!--" ++ s ++ "-->"
     (Schema s) -> DocL $ "<!" ++ s ++  ">"
     s -> error $ "Could not print " ++ (show s)
   where
     printAttrs [] = ""
-    printAttrs (Attribute a:kvs) = (printf " %s" a) ++ (printAttrs kvs)
+    printAttrs ((Attribute a v):kvs) = (printf " %s=%s" a (printValue v)) ++ (printAttrs kvs)
+    printValue (UrCode ur) = printf "{%s}" ur
+    printValue (QuotedString q s) = printf "%c%s%c" q s q
+    printValue (Number s) = s
 
 prettyPrint :: PPConfig -> XMLAST -> String
 prettyPrint cfg = ppDoc cfg False . xml2doc

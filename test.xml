@@ -7,10 +7,10 @@
     <c c='d'>
       under c2
     </c>
-    <c>
+    <c number=33 width="33" height="44">
       under c3
     </c>
-    <c src="asdasdad">
+    <c src="images/asdasdad.gif" urcode={main {}}>
       under c4
     </c>
   </b>

@@ -9,6 +9,7 @@ module Parser (
 ) where
 
 import Text.ParserCombinators.Parsec
+import Text.Printf
 
 import Type
 
@@ -96,18 +97,18 @@ attribute = do
   spaces
   value <- attrValue
   spaces
-  return $ Attribute $ key ++ ['='] ++ value
+  return $ Attribute key value
 
-attrValue = (try quotedString) <|> urCode
+attrValue = (try quotedString) <|> urCode <|> number
 
-urCode :: Parser String
+urCode :: Parser AttrValue
 urCode = do
   q <- char '{'
-  inner <- many1 $ (try (many1 (noneOf "{}"))) <|> urCode
+  inner <- many $ (try (many1 (noneOf "{}"))) <|> (urCode >>= \(UrCode x) -> return $ printf "{%s}" x)
   char '}'
-  return $ "{"++(concat inner)++"}"
+  return $ UrCode (concat inner)
 
-quotedString :: Parser String
+quotedString :: Parser AttrValue
 quotedString = do
   q <- (try (char '"')) <|> char '\''
   value <- fmap concat $ many
@@ -115,7 +116,10 @@ quotedString = do
       <|> try (string ['\\', q])
       <|> try (string "\\")
   char q
-  return $ [q] ++ value ++ [q]
+  return $ QuotedString q value
+
+number :: Parser AttrValue
+number = many1 digit >>= return . Number
 
 getAllElements :: XMLAST -> [(XMLAST, String, XMLAST)]
 getAllElements ast = getAllElements' ast "" ast

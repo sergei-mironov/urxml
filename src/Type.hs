@@ -13,8 +13,14 @@ data XMLAST =
   | CouldNotParse String
   deriving (Show, Data, Typeable)
 
-newtype Attribute = Attribute String
+data Attribute = Attribute String AttrValue
   deriving(Show,Data,Typeable)
+
+data AttrValue = UrCode String
+               | QuotedString Char String
+               | Number String
+  deriving(Show,Data,Typeable)
+
 
 type Name      = String
 type Key       = String

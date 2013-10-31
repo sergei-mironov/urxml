@@ -1,7 +1,7 @@
 UrXML
 =====
 
-UrXML is another XML parser/pretty-printer based on
+UrXML is yet another XML parser/pretty-printer based on
 [RSXP](http://hackage.haskell.org/package/really-simple-xml-parser) package by
 CK Kashyap.
 

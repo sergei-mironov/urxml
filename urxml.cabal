@@ -2,7 +2,7 @@
 -- further documentation, see http://haskell.org/cabal/users-guide/
 
 name:                urxml
-version:             0.1.0.0
+version:             0.2.0.0
 synopsis:            XML parser-printer supporting Ur/Web syntax extensions
 description:         UrXML is yet another XML parser/pretty-printer based on
                      [RSXP](http://hackage.haskell.org/package/really-simple-xml-parser) package by
@@ -26,7 +26,7 @@ cabal-version:       >=1.8
 
 executable urxml
   main-is:             UrXML.hs
-  build-depends:       base >= 4.6, parsec, mtl, optparse-applicative, syb, filepath,
+  build-depends:       base == 4.6.*, parsec, mtl, optparse-applicative, syb, filepath,
                        process
   hs-source-dirs:      src
 
